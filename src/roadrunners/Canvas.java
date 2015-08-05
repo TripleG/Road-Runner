@@ -56,6 +56,8 @@ public class Canvas extends JPanel{
         setSize(HEIGHT,WIDTH);
         playerIMG = player.loadImage();
         enemyIMG = CarEnemy.loadImage();
+        player.setX(Canvas.WIDTH/2);
+        player.setY(Canvas.HEIGHT - 49*2)  ;
         loadImage(); //tree image
         setDoubleBuffered(true);
         for(int i = 0; i < numberOfMarks; i++)
@@ -66,16 +68,29 @@ public class Canvas extends JPanel{
         roadMarkY = 0;
         
   
-        this.setBackground(Color.gray.darker().darker());
+        this.setBackground(Color.gray.darker().darker().darker());
   
     }
         
-   
+    public void restart()
+    {
+        player.setX(Canvas.WIDTH/2);
+        player.setY(Canvas.HEIGHT - 49*2)  ;
+        player.resetDistTravelled();
+        player.isAlive = true;
+        CarEnemy.enemySpeed=1;
+        Game.gameSpeed=2;
+    }
+   public  CarPlayer getPlayer()
+   {
+       return player;
+   }
     public void update()
     {
         
-        player.calcMovedDistance();
+        //player.calcMovedDistance();
         player.isCollided();
+        player.calcMovedDistance();
         if(isKeyRight)
         {
             if(player.getX() + Game.playerSpeed <= WIDTH/2 + 220 - CarPlayer.carW)
@@ -114,12 +129,8 @@ public class Canvas extends JPanel{
     
 
     
-    public CarPlayer getPlayer()
-    {
-        return player;
-    }
-    
-
+   
+   
     @Override
     public void paintComponent(Graphics g)
     {
@@ -204,7 +215,9 @@ public class Canvas extends JPanel{
         g.setFont(font); 
         g.drawString("Distance Travelled: \n", 1, 16);
         g.drawString( Integer.toString(player.getMovedDistance()), 5, 36);
-                
+        
+        g.drawString("Press ENTER", 2,100);
+        g.drawString("  to restart", 2,120);        
     }
     
 public void loadImage()

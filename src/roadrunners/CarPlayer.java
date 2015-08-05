@@ -1,5 +1,6 @@
 package roadrunners;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,6 +23,10 @@ public class CarPlayer {
     
     private int movedDist = 0;
     
+    public void resetDistTravelled()
+    {
+        this.distTravelled = 0;
+    }
     public void calcMovedDistance()
     {
         if(isAlive)
@@ -30,7 +35,7 @@ public class CarPlayer {
             
         }
         else
-        {
+        {  
             Game.updateTimer.stop();
         }
     }
@@ -45,8 +50,8 @@ public class CarPlayer {
        // boolean flag = false;
         Rectangle playerRect = new Rectangle(this.getX()+1
                 , this.getY()+1
-                , carW-1
-                , carH-1);
+                , carW-2
+                , carH-2);
                 
         for( int i = 0; i < enemies.size(); i++)
             {
@@ -62,6 +67,7 @@ public class CarPlayer {
                     //flag = true;
             //        isFarEnough = false;
                     isAlive = false;
+                    
                 }
             }
         //return flag;
@@ -104,8 +110,7 @@ public class CarPlayer {
                     }
      System.out.println("PLAYER loadImage called");
      //System.out.println(img.getHeight());
-     x = Canvas.WIDTH/2;
-     y = Canvas.HEIGHT - img.getHeight()*2;
+   
      
      return img;
      

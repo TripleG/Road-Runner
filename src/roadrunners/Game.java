@@ -28,7 +28,7 @@ public class Game implements KeyListener{
     public static int gameSpeed = 2;
     public static int playerSpeed = 2;
     static Canvas canvas;
-    
+    static JFrame frame ;
     
     public int getFrameH()
     {
@@ -54,7 +54,7 @@ public class Game implements KeyListener{
           
        
        Timer enemySpawnTimer;
-       JFrame frame = new JFrame("Road Runner");
+      frame = new JFrame("Road Runner");
        Game game = new Game();
       
        //canvas = new Canvas(game.player, game.enemy);
@@ -73,7 +73,7 @@ public class Game implements KeyListener{
                
        updateTimer = new Timer(1000/game.FPS, new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent ae) {
+        public void actionPerformed(ActionEvent e) {
 
             canvas.update();
         }
@@ -117,6 +117,16 @@ public class Game implements KeyListener{
             Canvas.isKeyLeft = true;
 
         }
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && !canvas.getPlayer().isAlive)
+        {
+          enemies.clear();
+          this.init();  
+          canvas.restart();                   
+         
+            //updateTimer.start();
+            updateTimer.restart();
+        }
+        
 
     }
 
