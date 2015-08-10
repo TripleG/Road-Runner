@@ -81,7 +81,14 @@ public class Game implements KeyListener{
        
        updateTimer.start();
        
-       
+       Thread trd = new Thread()
+       {
+           public void run() {
+            
+               System.out.println(Thread.currentThread().getName());
+         }
+       };
+       trd.start();
         //canvas.repaint();
        
        

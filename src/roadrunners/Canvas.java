@@ -2,7 +2,6 @@
 package roadrunners;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,15 +9,12 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import sun.tools.jar.Main;
 
 
@@ -80,6 +76,7 @@ public class Canvas extends JPanel{
         player.isAlive = true;
         CarEnemy.enemySpeed=1;
         Game.gameSpeed=2;
+        Game.playerSpeed = 2;
     }
    public  CarPlayer getPlayer()
    {
@@ -89,8 +86,9 @@ public class Canvas extends JPanel{
     {
         
         //player.calcMovedDistance();
-        player.isCollided();
-        player.calcMovedDistance();
+       // player.isCollided();
+       // player.calcMovedDistance();
+     
         if(isKeyRight)
         {
             if(player.getX() + Game.playerSpeed <= WIDTH/2 + 220 - CarPlayer.carW)
@@ -109,6 +107,8 @@ public class Canvas extends JPanel{
             }
             this.remove(labelInstructions);
         }
+        player.isCollided();
+        player.calcMovedDistance();
         for( int i = 0; i < Game.numberOfRedEnemies; i++)
         {
           // enemies[i].move(); 
@@ -120,6 +120,7 @@ public class Canvas extends JPanel{
            // System.out.println("N Enemies: " + enemies.size());
             CarEnemy.enemySpeed+=1;
             Game.gameSpeed+=2;
+            Game.playerSpeed++;
             System.out.println("game speed: " + Game.gameSpeed);
             System.out.println("enemy speed: " + CarEnemy.enemySpeed);
             
